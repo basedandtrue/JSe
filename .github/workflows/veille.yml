@@ -1,0 +1,44 @@
+name: veille-emploi
+
+on:
+  schedule:
+    - cron: "*/20 6-21 * * *"   # every 20 min, 06:00-21:59 UTC (offers don't post at night)
+  workflow_dispatch: {}          # manual "Run workflow" button for testing
+
+permissions:
+  contents: write                # allow the job to commit results back
+
+concurrency:
+  group: veille
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install requests beautifulsoup4
+
+      - name: Run veille
+        run: python3 veille_deux_tiers.py
+
+      - name: Publish to docs/ (GitHub Pages)
+        run: |
+          mkdir -p docs
+          cp report.html docs/index.html
+          cp tier1.xml tier2.xml docs/ 2>/dev/null || true
+
+      - name: Commit results
+        run: |
+          git config user.name  "veille-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/ seen_two_tier.json
+          git diff --cached --quiet && echo "no changes" && exit 0
+          git commit -m "veille: $(date -u '+%Y-%m-%d %H:%M') UTC"
+          git push
