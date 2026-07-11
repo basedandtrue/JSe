@@ -2,11 +2,11 @@ name: veille-emploi
 
 on:
   schedule:
-    - cron: "*/20 6-21 * * *"   # every 20 min, 06:00-21:59 UTC (offers don't post at night)
-  workflow_dispatch: {}          # manual "Run workflow" button for testing
+    - cron: "*/30 6-21 * * *"   # toutes les 30 min, 6h-22h UTC
+  workflow_dispatch: {}
 
 permissions:
-  contents: write                # allow the job to commit results back
+  contents: write
 
 concurrency:
   group: veille
@@ -23,22 +23,44 @@ jobs:
           python-version: "3.12"
 
       - name: Install deps
-        run: pip install requests beautifulsoup4
+        run: pip install requests beautifulsoup4 playwright
+
+      # Le navigateur pèse ~200 Mo : on le met en cache pour ne pas
+      # le retélécharger à chaque exécution.
+      - name: Cache Chromium
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-v1
+
+      - name: Install Chromium
+        if: steps.pw-cache.outputs.cache-hit != 'true'
+        run: python -m playwright install --with-deps chromium
+
+      - name: Install system libs (si Chromium vient du cache)
+        if: steps.pw-cache.outputs.cache-hit == 'true'
+        run: python -m playwright install-deps chromium
 
       - name: Run veille
-        run: python3 veille_deux_tiers.py
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}   # notification téléphone
+          NTFY_EMAIL: ${{ secrets.NTFY_EMAIL }}   # optionnel : aussi par mail
+          PRIM_TOKEN: ${{ secrets.PRIM_TOKEN }}   # optionnel : durées de trajet
+          REPORT_URL: ${{ vars.REPORT_URL }}      # lien ouvert au clic
+        run: python3 veille_v2.py
 
-      - name: Publish to docs/ (GitHub Pages)
+      - name: Publish
         run: |
           mkdir -p docs
           cp report.html docs/index.html
           cp tier1.xml tier2.xml docs/ 2>/dev/null || true
 
-      - name: Commit results
+      - name: Commit
         run: |
           git config user.name  "veille-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add docs/ seen_two_tier.json
-          git diff --cached --quiet && echo "no changes" && exit 0
+          git add docs/ seen_two_tier.json transit_cache.json 2>/dev/null || git add docs/ seen_two_tier.json
+          git diff --cached --quiet && echo "aucun changement" && exit 0
           git commit -m "veille: $(date -u '+%Y-%m-%d %H:%M') UTC"
           git push
