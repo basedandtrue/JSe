@@ -44,9 +44,17 @@ HUB_URL = ("https://www.emploi-territorial.fr/emploi-mobilite/"
            f"?search-ville={SEARCH_VILLE}&search-distance={SEARCH_DIST}"
            + "".join(f"&search-grade%5B%5D={g}" for g in GRADES))
 
-PP_TOWNS = ["ville-de-choisy-le-roi", "ville-de-creteil", "ville-de-maisons-alfort",
-            "ville-de-villejuif", "ville-de-bourg-la-reine", "ville-de-nogent",
-            "neuilly-sur-marne"]
+# slug Profil Public -> libelle propre (accents et traits d'union corrects :
+# sert l'affichage ET le geocodage des trajets)
+PP_TOWNS = {
+    "ville-de-choisy-le-roi":   "Choisy-le-Roi",
+    "ville-de-creteil":         "Créteil",
+    "ville-de-maisons-alfort":  "Maisons-Alfort",
+    "ville-de-villejuif":       "Villejuif",
+    "ville-de-bourg-la-reine":  "Bourg-la-Reine",
+    "ville-de-nogent":          "Nogent-sur-Marne",
+    "neuilly-sur-marne":        "Neuilly-sur-Marne",
+}
 GESTMAX_TABLE = [("https://emploi.gpsea.fr", "GPSEA")]              # variante <table>
 GESTMAX_LIST  = [("https://gestion-candidatures.valdemarne.fr", "Département du Val-de-Marne"),
                  ("https://recrutement.est-ensemble.fr", "Est Ensemble"),
@@ -241,14 +249,13 @@ def a_hub():
 
 def a_profilpublic():
     out = []
-    for slug in PP_TOWNS:
+    for slug, town in PP_TOWNS.items():
         try:
             d = requests.get("https://app.profilpublic.fr/api/jobs",
                 params={"filters[employer][slug][$eq]": slug, "pagination[pageSize]": 100,
                         "sort":"validatedAt:desc"}, headers=UA, timeout=30).json().get("data", [])
         except Exception as e:
             sys.stderr.write(f"[pp:{slug}] FAIL {e}\n"); continue
-        town = slug.replace("ville-de-","").replace("-"," ").title()
         for j in d:
             try: pub = dt.datetime.fromisoformat((j.get("validatedAt") or j["createdAt"]).replace("Z","+00:00"))
             except Exception: pub = None
@@ -843,6 +850,26 @@ def merge(records):
     return out
 
 # ----------------------------------------------------------------- MAIN
+def monitored():
+    """Employeurs lus en direct, avec leur mode de lecture. Sert la section finale
+    'Communes et employeurs suivis' : elle doit refleter la config, pas une liste
+    ecrite a la main qui se desynchroniserait."""
+    api  = list(PP_TOWNS.values())
+    api += [t for t, _, _ in WP_CPT] + [t for t, _ in WP_POSTS] + list(WP_JOBS)
+    api += list(RSS_FEEDS)
+    site = [t for _, t in GESTMAX_TABLE] + [t for _, t in GESTMAX_LIST] + [t for _, t in GESTMAX_TR]
+    site += ["Département des Hauts-de-Seine", "Sceaux", "Vincennes", "Champigny-sur-Marne",
+             "Charenton-le-Pont", "Montreuil", "Le Perreux-sur-Marne", "Massy",
+             "Noisy-le-Grand", "Paris Musées", "ESPCI", "Arcueil", "Fresnes",
+             "Rosny-sous-Bois", "Saint-Mandé"]
+    js   = ["Ivry-sur-Seine", "Neuilly-Plaisance", "Conseil départemental de l'Essonne"]
+    out = ([(n, "api") for n in api] + [(n, "site") for n in site] + [(n, "js") for n in js])
+    seen, uniq = set(), []
+    for n, m in sorted(out, key=lambda x: _n(x[0])):
+        if norm_town(n) in seen: continue
+        seen.add(norm_town(n)); uniq.append((n, m))
+    return uniq
+
 def main():
     R = []
     HEALTH = []   # (nom, nb_offres) pour l'etat des sources
@@ -914,7 +941,7 @@ def main():
 
     tc = transit_minutes({o["town"] for o in t1})
     ADAPTED = {norm_town(x) for x in (
-        [t.replace("ville-de-", "").replace("-", " ") for t in PP_TOWNS]
+        list(PP_TOWNS.values())
         + [e for _, e in GESTMAX_TABLE] + [e for _, e in GESTMAX_LIST]
         + list(RSS_FEEDS) + list(WP_JOBS)
         + ["Département des Hauts-de-Seine", "Sceaux", "Vincennes", "Champigny-sur-Marne",
@@ -939,7 +966,7 @@ def main():
             c = cov.setdefault(k, dict(town=o["town"], n=0))
             c["n"] += 1
     sys.stderr.write(f"[tiers] T1={len(t1)} T2={len(t2)} new={len(new)} hub-only={len(cov)}\n")
-    html_report(t1, t2, new, sorted(cov.values(), key=lambda c: -c["n"]), tc, HEALTH)
+    html_report(t1, t2, new, sorted(cov.values(), key=lambda c: -c["n"]), tc, HEALTH, monitored())
     rss_out(t1, "Veille culturelle — ciblé", "tier1.xml")
     rss_out(t2, "Veille culturelle — à vérifier", "tier2.xml")
 
@@ -957,7 +984,7 @@ f"""<?xml version="1.0" encoding="UTF-8"?>
 <lastBuildDate>{format_datetime(dt.datetime.now(dt.timezone.utc))}</lastBuildDate>
 {items}</channel></rss>""")
 
-def html_report(t1, t2, new, cov, tc, health=()):
+def html_report(t1, t2, new, cov, tc, health=(), mons=()):
     now = dt.datetime.now()
     fresh = [o for o in t1 if o["guid"] in new]
     n_fast = sum(1 for o in t1 if "mairie" in o["sources"])
@@ -1018,6 +1045,9 @@ def html_report(t1, t2, new, cov, tc, health=()):
         <span class="town">{escape(o['town'])}</span></td></tr>""" for o in t2[:400])
 
     covrows = "".join(f"<li>{escape(c['town'])} <span>{c['n']}</span></li>" for c in cov) or "<li>Toutes les collectivités suivies sont lues en direct.</li>"
+    MODE = {"api": "API", "site": "site", "js": "navigateur"}
+    mon_rows = "".join(
+        f'<li>{escape(nm)} <span>{MODE[m]}</span></li>' for nm, m in mons)
     health_rows = "".join(
         f'<li class="{"dead" if not n else ""}">{escape(nm)} <span>{n}</span></li>'
         for nm, n in health)
@@ -1127,6 +1157,12 @@ def html_report(t1, t2, new, cov, tc, health=()):
   .cov{{list-style:none;padding:0;margin:.8rem 0 0;columns:2;font-size:.85rem}}
   .cov li{{padding:.2rem 0;color:var(--ink-2)}}
   .cov span{{font:400 .72rem "IBM Plex Mono",monospace;color:var(--ink-3)}}
+  .monitored{{columns:3;font-size:.85rem}}
+  .monitored li{{break-inside:avoid;padding:.22rem 0;color:var(--ink)}}
+  .monitored span{{font:400 .64rem "IBM Plex Mono",monospace;color:var(--ink-3);
+    text-transform:uppercase;letter-spacing:.06em;margin-left:.3rem}}
+  @media(max-width:820px){{.monitored{{columns:2}}}}
+  @media(max-width:520px){{.monitored{{columns:1}}}}
   .health li.dead{{color:var(--stamp)}}
   .health li.dead span{{color:var(--stamp);font-weight:500}}
   footer{{margin-top:3.5rem;padding-top:1rem;border-top:1px solid var(--rule);
@@ -1193,6 +1229,14 @@ def html_report(t1, t2, new, cov, tc, health=()):
   <p class="lead">Collectivités encore lues via le hub uniquement — leurs offres peuvent
      arriver avec du retard.</p>
   <ul class="cov">{covrows}</ul>
+
+  <h2 class="sec">Communes et employeurs suivis <span class="n">{len(mons)} en direct</span></h2>
+  <p class="lead">Ces collectivités sont lues sur leur propre site, sans attendre le hub.
+     <em>API</em> : flux ou interface de données · <em>site</em> : lecture de la page ·
+     <em>navigateur</em> : la page n'existe qu'après exécution du JavaScript.<br>
+     S'y ajoute <strong>emploi-territorial</strong>, qui couvre <em>toutes</em> les autres
+     collectivités dans les 20 km autour de {ORIGIN_NAME} — mais avec un délai de publication.</p>
+  <ul class="cov monitored">{mon_rows}</ul>
 
   <footer>
     ≈ date de première détection (la source ne date pas ses offres) ·
