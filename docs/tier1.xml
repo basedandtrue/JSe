@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>Veille culturelle — ciblé</title>
-<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>120 offres</description>
-<lastBuildDate>Mon, 20 Jul 2026 15:34:22 +0000</lastBuildDate>
+<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>124 offres</description>
+<lastBuildDate>Mon, 20 Jul 2026 20:51:15 +0000</lastBuildDate>
   <item>
     <title>adjoint du patrimoine jeunesse (H/F)</title><link>https://www.ivry94.fr/595/ivry-recrute.htm</link>
     <guid isPermaLink="false">job-e41c757c67d4cc90</guid>
-    <pubDate>Mon, 20 Jul 2026 15:34:22 +0000</pubDate>
+    <pubDate>Mon, 20 Jul 2026 20:51:15 +0000</pubDate>
     <description>Ivry-sur-Seine</description>
   </item>
   <item>
@@ -477,6 +477,12 @@
     <description>Neuilly-sur-Marne | cat. B</description>
   </item>
   <item>
+    <title>Chargé de Relations Publiques et Internationales - Remplacement (Homme/Femme)</title><link>https://www.ville-chevilly-larue.fr/offres-emploi/charge-de-relations-publiques-et-internationales-remplacement-homme-femme/</link>
+    <guid isPermaLink="false">job-b7d418350d79b73f</guid>
+    <pubDate>Wed, 17 Jun 2026 16:56:14 +0000</pubDate>
+    <description>Chevilly-Larue</description>
+  </item>
+  <item>
     <title>Agent chargé de l'accueil des publics et des collections en section jeunesse (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094260617001319-agent-charge-accueil-publics-collections-section-jeunesse</link>
     <guid isPermaLink="false">job-812950f7c0950173</guid>
     <pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
@@ -555,7 +561,7 @@
     <description>Sceaux | cat. C</description>
   </item>
   <item>
-    <title>Directeur des affaires culturelles (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094260604001977-directeur-affaires-culturelles</link>
+    <title>Directeur(trice) des affaires culturelles (F/H)</title><link>https://www.arcueil.fr/offres-demploi/</link>
     <guid isPermaLink="false">job-4ba150ffa2ea3155</guid>
     <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
     <description>Arcueil | cat. A</description>
@@ -717,9 +723,27 @@
     <description>Grand-Orly Seine Bièvre | cat. B</description>
   </item>
   <item>
+    <title>Gestionnaire du patrimoine bâti (Homme/Femme)</title><link>https://www.ville-chevilly-larue.fr/offres-emploi/gestionnaire-du-patrimoine-bati-homme-femme/</link>
+    <guid isPermaLink="false">job-ea0c121c28154499</guid>
+    <pubDate>Fri, 14 Nov 2025 16:24:58 +0000</pubDate>
+    <description>Chevilly-Larue</description>
+  </item>
+  <item>
+    <title>Directeur. trice Conservatoire Arpajon F/H</title><link>https://www.coeuressonne.fr/offre-d-emploi/directeur-trice-conservatoire-arpajon-f-h/</link>
+    <guid isPermaLink="false">job-7bcec989f33ff453</guid>
+    <pubDate>Fri, 03 Oct 2025 14:53:52 +0000</pubDate>
+    <description>Coeur d'Essonne</description>
+  </item>
+  <item>
     <title>Responsable de la section jeunesse - Bibliothèque Hergé F/H(Nouvelle fenêtre)</title><link>https://travaillerpourparis.offres.paris.fr/7691/1/responsable-de-la-section-jeunesse-bibliotheque-herge-f-h</link>
     <guid isPermaLink="false">job-d76a20ee88225686</guid>
     <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
     <description>Ville de Paris | cat. B</description>
+  </item>
+  <item>
+    <title>Agent de médiathèque F/H</title><link>https://www.coeuressonne.fr/offre-d-emploi/agent-de-mediatheque-f-h/</link>
+    <guid isPermaLink="false">job-8376d9f44d128755</guid>
+    <pubDate>Fri, 15 Mar 2024 17:56:28 +0000</pubDate>
+    <description>Coeur d'Essonne</description>
   </item>
 </channel></rss>
