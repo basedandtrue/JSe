@@ -21,6 +21,7 @@ from difflib import SequenceMatcher
 from email.utils import format_datetime
 from urllib.parse import quote_plus
 from xml.sax.saxutils import escape
+import math
 import requests
 from bs4 import BeautifulSoup
 
@@ -177,23 +178,40 @@ def norm_town(s):
     return ALIASES.get(t, t)
 
 def norm_title(s):
-    t = re.sub(r"[^a-z0-9 ]", " ", _n(s))
+    t = _n(s)
+    t = re.sub(r"\(?\s*nouvelle\s+fen[eê]tre\s*\)?", " ", t)   # parasite gestmax
+    t = re.sub(r"[^a-z0-9 ]", " ", t)
     t = re.sub(r"\b([fh])\s*[/-]?\s*([hf])\b", "", t)
     t = re.sub(r"\b(copie|remplacement|cdd|cdi|un|une)\b", "", t)
     return re.sub(r"\s+", " ", t).strip()
 
 STOP = {"hf","fh","h","f","cdd","cdi","un","une","de","du","des","la","le","les","en","et",
         "a","au","aux","pour","sur","poste","offre","temps","heures","heure","mois","ans","au",
-        "recrute","recrutement","ou","dans","par","avec","son","sa","the"}
+        "recrute","recrutement","ou","dans","par","avec","son","sa","the",
+        "nouvelle","fenetre","hebdo","hebdomadaire"}
 
 def toks(t):
     return {w for w in norm_title(t).split() if len(w) > 2 and w not in STOP}
 
+# Lieux frequemment cites dans les intitules VYVS/intercommunaux : servent a distinguer
+# deux postes du meme employeur rattaches a des equipements differents.
+_PLACE_RE = re.compile(
+    r"\b(montgeron|brunoy|epinay|quincy|boussy|draveil|vigneux|yerres|crosne|"
+    r"villeneuve|plateau briard|plessis|queue en brie|sucy|bonneuil|creteil|"
+    r"alfortville|choisy|ivry|vitry|villejuif|thiais|orly|rungis)\b")
+
+def _places(t):
+    return set(_PLACE_RE.findall(_n(t)))
+
 def same_job(a_t, a_k, b_t, b_k):
-    """Meme offre ? Il faut (1) un employeur/lieu commun ET (2) des titres concordants.
-    Deux tests de titre : chaine entiere (strict) OU recouvrement de mots-cles
-    (tolere 'Mediathecaire jeunesse (CDD 7 mois)' vs 'Mediathecaire secteur jeunesse')."""
+    """Meme offre ? (1) employeur/lieu commun ET (2) titres concordants ET
+    (3) pas de lieu explicitement different dans les deux intitules."""
     if not (a_k & b_k):
+        return False
+    # garde-fou : si les deux titres nomment un lieu et que ces lieux different,
+    # ce sont deux postes distincts (ex. mediatheque de Montgeron vs de Brunoy).
+    pa, pb = _places(a_t), _places(b_t)
+    if pa and pb and not (pa & pb):
         return False
     if SequenceMatcher(None, norm_title(a_t), norm_title(b_t)).ratio() >= FUZZY:
         return True
@@ -204,6 +222,7 @@ def same_job(a_t, a_k, b_t, b_k):
     return len(inter) >= 2 and len(inter) / min(len(ta), len(tb)) >= 0.6
 
 def rec(**k):
+    if "title" in k: k["title"] = re.sub(r"\s*\(?\s*[Nn]ouvelle\s+[Ff]en[eê]tre\s*\)?\s*$", "", k["title"] or "").strip()
     k.setdefault("category", None); k.setdefault("filiere", None)
     k.setdefault("published", None)
     k.setdefault("employer", k.get("town"))     # employeur (peut differer du lieu)
@@ -557,9 +576,14 @@ def a_noisy():
             published=pub, category=(mc.group(1) if mc else None), filiere=fil))
     return out
 
-def _push(out, title, url, town, cat=None, pub=None):
-    t = re.sub(r"\s+", " ", (title or "")).strip()
+def _clean_title(t):
+    t = re.sub(r"\s+", " ", (t or "")).strip()
+    t = re.sub(r"\s*\(?\s*nouvelle\s+fen[eê]tre\s*\)?\s*$", "", t, flags=re.I)
     t = re.sub(r"\s*\(pdf\)\s*$", "", t, flags=re.I)
+    return t.strip()
+
+def _push(out, title, url, town, cat=None, pub=None):
+    t = _clean_title(title)
     if len(t) < 10 or NOTJOB.search(t): return
     out.append(rec(source="mairie", direct=True, ongrade=False, untagged=True,
                    title=t[:120], town=town, employer=town, url=url,
@@ -767,49 +791,101 @@ def a_headless():
 # ----------------------------------------------------------------- TRANSIT
 def transit_link(town):
     return ("https://www.google.com/maps/dir/?api=1&travelmode=transit"
-            f"&origin={quote_plus(ORIGIN_NAME+', France')}"
-            f"&destination={quote_plus(town+', France')}")
+            f"&origin={quote_plus(ORIGIN_NAME + ', France')}"
+            f"&destination={quote_plus(town + ', France')}")
 
-def transit_minutes(towns):
-    """Durée porte-à-porte via l'API PRIM (IDFM). Nécessite PRIM_TOKEN.
-    Mise en cache : une commune n'est calculée qu'une fois."""
-    try: cache = json.load(open(TCACHE))
-    except Exception: cache = {}
-    if not PRIM:
-        return cache            # pas de clé -> on garde ce qu'on a (souvent vide)
-    todo = [t for t in towns if t not in cache]
-    for t in todo:
+# Employeurs qui ne sont pas des communes : equivalence geographique SEULEMENT
+# quand elle est affirmable (siege d'un departement, etablissement parisien).
+# Les intercommunalites (GPSEA, Est Ensemble...) ne sont PAS mappees : le poste peut
+# se trouver dans n'importe quelle commune membre -> on affiche "—" plutot qu'un
+# chiffre faux. Quand la source donne le lieu reel, il arrive deja dans o["town"].
+GEO_ALIAS = {
+    "paris musees": "Paris",
+    "espci": "Paris",
+    "ville de paris": "Paris",
+    "departement du val-de-marne": "Créteil",
+    "departement des hauts-de-seine": "Nanterre",
+    "conseil departemental de l'essonne": "Évry-Courcouronnes",
+}
+
+def _commune_query(town):
+    key = _n(town)
+    for k, v in GEO_ALIAS.items():          # correspondance par inclusion :
+        if _n(k) in key:                    # "...Chimie Industrielles (ESPCI)" -> Paris
+            return v
+    t = re.sub(r"\(.*?\)", "", town).strip()
+    t = re.sub(r"^(Ville de|Mairie de|Commune de)\s+", "", t, flags=re.I)
+    t = re.split(r"\s+et\s+|\s*;\s*|\s*/\s*", t)[0]   # "Boissy... et Limeil..." -> la 1re
+    return t.strip()
+
+def _haversine(a, b):
+    R = 6371.0
+    la1, lo1, la2, lo2 = map(math.radians, [a[0], a[1], b[0], b[1]])
+    h = (math.sin((la2 - la1) / 2) ** 2
+         + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2)
+    return 2 * R * math.asin(math.sqrt(h))
+
+def geo_data(towns):
+    """Pour chaque commune : distance a vol d'oiseau (toujours) et duree en
+    transports (seulement si une cle PRIM est fournie). Cache sur disque :
+    une commune n'est interrogee qu'une fois."""
+    try:
+        cache = json.load(open(TCACHE))
+    except Exception:
+        cache = {}
+    if cache and isinstance(next(iter(cache.values()), None), (int, float, type(None))):
+        cache = {}                      # ancien format (minutes seules) -> on repart propre
+
+    for t in towns:
+        entry = cache.get(t)
+        if entry and "km" in entry and (entry.get("min") is not None or not PRIM):
+            continue
+        entry = entry or {"km": None, "min": None}
+        q = _commune_query(t)
+        lat = lon = None
         try:
             g = requests.get("https://geo.api.gouv.fr/communes",
-                params={"nom": t, "fields":"centre", "boost":"population", "limit":1}, timeout=15).json()
-            if not g: cache[t] = None; continue
-            lon, lat = g[0]["centre"]["coordinates"]
-            when = (dt.datetime.now(dt.timezone.utc)+dt.timedelta(days=1)).strftime("%Y%m%dT090000")
-            r = requests.get("https://prim.iledefrance-mobilites.fr/marketplace/v2/navitia/journeys",
-                params={"from": f"{ORIGIN_LATLON[1]};{ORIGIN_LATLON[0]}",
-                        "to": f"{lon};{lat}", "datetime": when},
-                headers={"apikey": PRIM}, timeout=25)
-            js = r.json()
-            secs = [j["duration"] for j in js.get("journeys", []) if j.get("duration")]
-            cache[t] = round(min(secs)/60) if secs else None
+                             params={"nom": q, "fields": "centre", "boost": "population",
+                                     "limit": 1}, timeout=15).json()
+            if g:
+                lon, lat = g[0]["centre"]["coordinates"]
+                entry["km"] = round(_haversine(ORIGIN_LATLON, (lat, lon)), 1)
         except Exception as e:
-            sys.stderr.write(f"[transit:{t}] {str(e)[:50]}\n"); cache[t] = None
-    json.dump(cache, open(TCACHE,"w"), ensure_ascii=False, indent=0)
+            sys.stderr.write(f"[geo:{t}] {str(e)[:40]}\n")
+
+        if PRIM and lat is not None and entry.get("min") is None:
+            try:
+                when = (dt.datetime.now(dt.timezone.utc)
+                        + dt.timedelta(days=1)).strftime("%Y%m%dT090000")
+                r = requests.get(
+                    "https://prim.iledefrance-mobilites.fr/marketplace/v2/navitia/journeys",
+                    params={"from": f"{ORIGIN_LATLON[1]};{ORIGIN_LATLON[0]}",
+                            "to": f"{lon};{lat}", "datetime": when},
+                    headers={"apikey": PRIM}, timeout=25)
+                secs = [j["duration"] for j in r.json().get("journeys", []) if j.get("duration")]
+                entry["min"] = round(min(secs) / 60) if secs else None
+            except Exception as e:
+                sys.stderr.write(f"[prim:{t}] {str(e)[:40]}\n")
+        cache[t] = entry
+
+    json.dump(cache, open(TCACHE, "w"), ensure_ascii=False, indent=0)
+    n_km = sum(1 for v in cache.values() if v.get("km") is not None)
+    n_min = sum(1 for v in cache.values() if v.get("min") is not None)
+    sys.stderr.write(f"[geo] {n_km} distances" + (f", {n_min} durées PRIM\n" if PRIM
+                     else " — durées de trajet indisponibles (pas de clé PRIM)\n"))
     return cache
 
 def notify(fresh):
-    """Envoie UNE notification recapitulative (pas une par offre) vers le telephone.
-    Silencieux si NTFY_TOPIC n'est pas configure : le script reste utilisable sans."""
+    """Une seule notification recapitulative (jamais une par offre).
+    Silencieux si NTFY_TOPIC n'est pas configure."""
     if not fresh or not NTFY_TOPIC:
         return
     n = len(fresh)
-    titre = f"{n} nouvelle offre" + ("s" if n > 1 else "")
     lignes = [f"• {o['title']} — {o['town']}" for o in fresh[:5]]
     if n > 5:
         lignes.append(f"… et {n - 5} autre(s)")
-    corps = "\n".join(lignes)
-    headers = {"Title": titre.encode("utf-8"), "Tags": "books", "Priority": "default"}
-    # Si une seule offre, le clic mene droit a l'offre ; sinon au rapport.
+    headers = {"Title": (f"{n} nouvelle offre" + ("s" if n > 1 else "")).encode("utf-8"),
+               "Tags": "books"}
     cible = fresh[0]["url"] if n == 1 else REPORT_URL
     if cible:
         headers["Click"] = cible
@@ -817,7 +893,8 @@ def notify(fresh):
         headers["Email"] = NTFY_EMAIL
     try:
         r = requests.post(f"https://ntfy.sh/{NTFY_TOPIC}",
-                          data=corps.encode("utf-8"), headers=headers, timeout=15)
+                          data="\n".join(lignes).encode("utf-8"),
+                          headers=headers, timeout=15)
         sys.stderr.write(f"[notify] ntfy {r.status_code} — {n} offre(s)\n")
     except Exception as e:
         sys.stderr.write(f"[notify] echec {str(e)[:60]}\n")
@@ -939,7 +1016,7 @@ def main():
 
     notify([o for o in t1 if o["guid"] in new])   # Tier 1 uniquement : pas de bruit
 
-    tc = transit_minutes({o["town"] for o in t1})
+    tc = geo_data({o["town"] for o in t1})
     ADAPTED = {norm_town(x) for x in (
         list(PP_TOWNS.values())
         + [e for _, e in GESTMAX_TABLE] + [e for _, e in GESTMAX_LIST]
@@ -993,10 +1070,18 @@ def html_report(t1, t2, new, cov, tc, health=(), mons=()):
         return (f'<span class="cat cat-{c}">{c}</span>' if c in ("A", "B", "C")
                 else '<span class="cat cat-none">·</span>')
 
+    def dist_cell(o):
+        e = tc.get(o["town"]) or {}
+        km = e.get("km")
+        return (f'<span class="km">{km:.0f}<span class="u">km</span></span>'
+                if isinstance(km, (int, float)) else '<span class="km none">—</span>')
+
     def trajet(o):
-        m = tc.get(o["town"])
+        e = tc.get(o["town"]) or {}
+        m = e.get("min")
         if isinstance(m, int):
-            return f'<span class="mins">{m}<span class="u">min</span></span>'
+            return (f'<a class="mins" target="_blank" rel="noopener" '
+                    f'href="{escape(transit_link(o["town"]))}">{m}<span class="u">min</span></a>')
         return (f'<a class="mins-link" target="_blank" rel="noopener" '
                 f'href="{escape(transit_link(o["town"]))}">itinéraire</a>')
 
@@ -1018,6 +1103,7 @@ def html_report(t1, t2, new, cov, tc, health=(), mons=()):
             <span class="town">{escape(o['town'])}</span>
           </td>
           <td class="c-src">{src}</td>
+          <td class="c-km">{dist_cell(o)}</td>
           <td class="c-trajet">{trajet(o)}</td>
         </tr>"""
 
@@ -1138,8 +1224,14 @@ def html_report(t1, t2, new, cov, tc, health=(), mons=()):
   .c-src{{width:74px}}
   .src{{font:400 .64rem/1 "IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.07em}}
   .src-fast{{color:var(--fast)}} .src-hub{{color:var(--hub)}}
-  .c-trajet{{width:88px;text-align:right}}
-  .mins{{font:500 .85rem "IBM Plex Mono",monospace}}
+  .c-km{{width:62px;text-align:right}}
+  .km{{font:500 .82rem "IBM Plex Mono",monospace;color:var(--ink-2)}}
+  .km .u{{font-size:.58rem;color:var(--ink-3);margin-left:2px}}
+  .km.none{{color:#CFCBC1}}
+  .c-trajet{{width:92px;text-align:right}}
+  .mins{{font:500 .85rem "IBM Plex Mono",monospace;color:var(--ink);text-decoration:none;
+    border-bottom:1px solid var(--rule)}}
+  .mins:hover{{border-bottom-color:var(--ink)}}
   .mins .u{{font-size:.6rem;color:var(--ink-3);margin-left:2px}}
   .mins-link{{font:400 .68rem "IBM Plex Mono",monospace;color:var(--ink-3);
     text-decoration:none;border-bottom:1px dotted var(--ink-3)}}
@@ -1170,7 +1262,7 @@ def html_report(t1, t2, new, cov, tc, health=(), mons=()):
   .empty{{padding:1.4rem;color:var(--ink-3);font-size:.85rem;display:none}}
   @media(max-width:620px){{
     h1{{font-size:2rem}} .new-panel{{flex-direction:column;gap:1rem}}
-    .c-trajet,.c-src{{display:none}} .cov{{columns:1}}
+    .c-src{{display:none}} .cov{{columns:1}}
   }}
   @media(prefers-reduced-motion:no-preference){{
     .new-panel{{animation:rise .5s ease-out both}}
@@ -1202,7 +1294,7 @@ def html_report(t1, t2, new, cov, tc, health=(), mons=()):
     <button class="chip" data-f="C" aria-pressed="false">Cat. C</button>
   </div>
   <table id="t1">
-    <thead><tr><th>Publiée</th><th>Cat.</th><th>Offre</th><th>Source</th><th>Trajet</th></tr></thead>
+    <thead><tr><th>Publiée</th><th>Cat.</th><th>Offre</th><th>Source</th><th title="Distance à vol d'oiseau depuis Montgeron">Distance</th><th>Trajet</th></tr></thead>
     <tbody>
       {"".join(row(o, o["guid"] in new) for o in t1)}
     </tbody>
@@ -1239,6 +1331,10 @@ def html_report(t1, t2, new, cov, tc, health=(), mons=()):
   <ul class="cov monitored">{mon_rows}</ul>
 
   <footer>
+    <strong>Distance</strong> : à vol d'oiseau depuis {ORIGIN_NAME} — elle ne prédit pas le
+    temps de trajet (un trajet radial en RER bat souvent un trajet tangentiel plus court).
+    <strong>Trajet</strong> : durée réelle en transports si une clé PRIM est configurée,
+    sinon un lien vers l'itinéraire.<br>
     ≈ date de première détection (la source ne date pas ses offres) ·
     {len(GRADES)} grades suivis · généré le {now.strftime('%d/%m/%Y à %H:%M')}
   </footer>
