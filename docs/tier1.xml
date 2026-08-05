@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>Veille culturelle — ciblé</title>
 <link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>137 offres</description>
-<lastBuildDate>Wed, 05 Aug 2026 12:28:27 +0000</lastBuildDate>
+<lastBuildDate>Wed, 05 Aug 2026 18:10:29 +0000</lastBuildDate>
   <item>
     <title>Agent de médiathèque H/F - Médiathèque d'Igny</title><link>https://www.emploi-territorial.fr/offre/o091260804001566-agent-mediatheque-mediatheque-igny</link>
     <guid isPermaLink="false">job-630becb37f8174d2</guid>
@@ -67,6 +67,12 @@
     <guid isPermaLink="false">job-d21d59a5a939b797</guid>
     <pubDate>Wed, 29 Jul 2026 17:55:59 +0000</pubDate>
     <description>Ville de Paris</description>
+  </item>
+  <item>
+    <title>Médiathécaire polyvalent pôle accueil des publics et partenariats (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094260728001344-mediathecaire-polyvalent-pole-accueil-publics-partenariats</link>
+    <guid isPermaLink="false">job-0fe8ecfdff0f548f</guid>
+    <pubDate>Tue, 28 Jul 2026 00:00:00 +0000</pubDate>
+    <description>Grand Paris Sud Est Avenir (T11) | cat. B</description>
   </item>
   <item>
     <title>Médiateur numérique (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094260728000085-mediateur-numerique</link>
@@ -345,12 +351,6 @@
     <description>Le Plessis-Trévise | cat. B</description>
   </item>
   <item>
-    <title>Médiathécaire - Référent socioculturel - Pôle action culturelle et partenariats  F/H</title><link>https://emploi.gpsea.fr/1365/1/mediathecaire-referent-socioculturel-pole-action-culturelle-et-partenariats-f-h</link>
-    <guid isPermaLink="false">job-8edd23ae3f206ba4</guid>
-    <pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate>
-    <description>Chennevières-sur-Marne et Ormesson-sur-Marne</description>
-  </item>
-  <item>
     <title>Directeur du Conservatoire à Rayonnement Intercommunal d'Alfortville H/F</title><link>https://emploi.gpsea.fr/1511/1/directeur-du-conservatoire-a-rayonnement-intercommunal-d-alfortville-h-f</link>
     <guid isPermaLink="false">job-49d7599d81248770</guid>
     <pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate>
@@ -597,10 +597,10 @@
     <description>Département du Val-de-Marne | cat. A</description>
   </item>
   <item>
-    <title>Médiathécaire polyvalent pôle accueil des publics et partenariats (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094260728001344-mediathecaire-polyvalent-pole-accueil-publics-partenariats</link>
-    <guid isPermaLink="false">job-0fe8ecfdff0f548f</guid>
+    <title>Médiathécaire - Référent socioculturel - Pôle action culturelle et partenariats  F/H</title><link>https://emploi.gpsea.fr/1365/1/mediathecaire-referent-socioculturel-pole-action-culturelle-et-partenariats-f-h</link>
+    <guid isPermaLink="false">job-1485e9a028d67fe1</guid>
     <pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate>
-    <description>Grand Paris Sud Est Avenir (T11) | cat. B</description>
+    <description>Chennevières-sur-Marne et Ormesson-sur-Marne | cat. C</description>
   </item>
   <item>
     <title>Archiviste référent (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094260619001665-archiviste-referent</link>
