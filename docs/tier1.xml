@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>Veille culturelle — ciblé</title>
-<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>110 offres</description>
-<lastBuildDate>Mon, 28 Sep 2026 12:24:50 +0000</lastBuildDate>
+<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>112 offres</description>
+<lastBuildDate>Mon, 28 Sep 2026 19:47:47 +0000</lastBuildDate>
+  <item>
+    <title>Directeur(rice) du patrimoine (F-H)</title><link>https://www.longjumeau.fr/offres-emploi/directeurrice-du-patrimoine-f-h/</link>
+    <guid isPermaLink="false">job-e2c458afaf1e163f</guid>
+    <pubDate>Mon, 28 Sep 2026 16:10:11 +0000</pubDate>
+    <description>Longjumeau</description>
+  </item>
+  <item>
+    <title>Médiateur de la Micro-Folie (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094260928001363-mediateur-micro-folie</link>
+    <guid isPermaLink="false">job-ea5182ff2886edee</guid>
+    <pubDate>Mon, 28 Sep 2026 00:00:00 +0000</pubDate>
+    <description>Villejuif | cat. B</description>
+  </item>
   <item>
     <title>Directeur(trice) des affaires culturelles (F/H)</title><link>https://www.arcueil.fr/offres-demploi/</link>
     <guid isPermaLink="false">job-7296f225d8197c05</guid>
@@ -27,7 +39,7 @@
     <description>Bagneux | cat. C</description>
   </item>
   <item>
-    <title>Chargé d'étude et de valorisation des collections / Chargé des expositions</title><link>https://recrutement.hauts-de-seine.fr/nos-offres-demploi/detail/charge-d-etude-et-de-valorisation-des-collections-charge-des-expositions</link>
+    <title>Chargé d'étude et de valorisation des collections / Chargé des expositions H/F</title><link>https://recrutement.hauts-de-seine.fr/nos-offres-demploi/detail/charge-d-etude-et-de-valorisation-des-collections-charge-des-expositions</link>
     <guid isPermaLink="false">job-b9c95b05d55d796a</guid>
     <pubDate>Wed, 23 Sep 2026 19:10:16 +0000</pubDate>
     <description>Département des Hauts-de-Seine</description>
@@ -561,12 +573,6 @@
     <description>Creteil | cat. A</description>
   </item>
   <item>
-    <title>Médiathécaire jeunesse (CDD 7 mois)</title><link>https://www.grandorlyseinebievre.fr/offres-demploi-du-grand-orly-seine-bievre/mediathecaire-jeunesse-cdd-7-mois</link>
-    <guid isPermaLink="false">job-86f3225cc6cac754</guid>
-    <pubDate>Fri, 10 Jul 2026 15:18:00 +0000</pubDate>
-    <description>Grand-Orly Seine Bièvre</description>
-  </item>
-  <item>
     <title>RESPONSABLE DU PÔLE ARTS, LANGUES ET LITTÉRATURE – F-H Réseau des Médiathèques – Direction des Affaires Cultur</title><link>https://www.ville-massy.fr/offres-demploi/responsable-du-pole-arts-langues-et-litterature-f-h-reseau-des-mediatheques-direction-des-affaires-culturelles/</link>
     <guid isPermaLink="false">job-a7c430d8cce22116</guid>
     <pubDate>Wed, 08 Jul 2026 00:00:00 +0000</pubDate>
@@ -640,7 +646,13 @@
   </item>
   <item>
     <title>Responsable secteur jeunesse médiathèques de Villeneuve-Saint-Georges</title><link>https://www.grandorlyseinebievre.fr/offres-demploi-du-grand-orly-seine-bievre/responsable-secteur-jeunesse-mediatheques-de-villeneuve</link>
-    <guid isPermaLink="false">job-923f0cb591a8ab90</guid>
+    <guid isPermaLink="false">job-b241883a587462de</guid>
+    <pubDate>Tue, 23 Dec 2025 09:10:00 +0000</pubDate>
+    <description>Grand-Orly Seine Bièvre</description>
+  </item>
+  <item>
+    <title>Médiathécaire jeunesse (CDD 7 mois)</title><link>https://www.grandorlyseinebievre.fr/offres-demploi-du-grand-orly-seine-bievre/mediathecaire-jeunesse-cdd-7-mois</link>
+    <guid isPermaLink="false">job-9f39e877768f34c3</guid>
     <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
     <description>Grand-Orly Seine Bièvre | cat. B</description>
   </item>
