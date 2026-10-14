@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>Veille culturelle — à vérifier</title>
-<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>543 offres</description>
-<lastBuildDate>Wed, 14 Oct 2026 15:40:24 +0000</lastBuildDate>
+<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>556 offres</description>
+<lastBuildDate>Wed, 14 Oct 2026 19:52:41 +0000</lastBuildDate>
+  <item>
+    <title>Assistant(e) formation et recrutement en contrat d'apprentissage</title><link>https://www.parismusees.paris.fr/fr/node/7662</link>
+    <guid isPermaLink="false">job-4aa2c06b975b785a</guid>
+    <pubDate>Wed, 14 Oct 2026 19:52:41 +0000</pubDate>
+    <description>Paris Musées</description>
+  </item>
   <item>
     <title>Assistant.e évènementiel et communication</title><link>https://recrutement.est-ensemble.fr/785/1/assistant-e-evenementiel-et-communication</link>
     <guid isPermaLink="false">job-efd44680ebd183ff</guid>
@@ -357,6 +363,12 @@
     <description>Ville de Paris</description>
   </item>
   <item>
+    <title>AGENT·E DE PROPRETE DE LA VILLE (F-H) – DIRECTION CADRE DE VIE – CATEGORIE C</title><link>https://www.ville-massy.fr/offres-demploi/agent%c2%b7e-de-proprete-de-la-ville-f-h-direction-cadre-de-vie-categorie-c/</link>
+    <guid isPermaLink="false">job-7ee0af01a62d2243</guid>
+    <pubDate>Wed, 07 Oct 2026 12:20:58 +0000</pubDate>
+    <description>Massy</description>
+  </item>
+  <item>
     <title>Auxiliaire de puériculture (H/F)</title><link>https://recrutement.sceaux.fr/2026/10/07/auxiliaire-de-puericulture-h-f/</link>
     <guid isPermaLink="false">job-eebfa22225f369d0</guid>
     <pubDate>Wed, 07 Oct 2026 09:54:28 +0000</pubDate>
@@ -438,6 +450,18 @@
     <title>Adjoint-adjointe de la cheffe service des finances et des achats - Mairie du 18è  F/H</title><link>https://travaillerpourparis.offres.paris.fr/15141/1/adjoint-adjointe-de-la-cheffe-service-des-finances-et-des-achats-mairie-du-18e-f-h</link>
     <guid isPermaLink="false">job-7125142a9e20b4ab</guid>
     <pubDate>Sun, 04 Oct 2026 22:39:18 +0000</pubDate>
+    <description>Ville de Paris</description>
+  </item>
+  <item>
+    <title>Agent social accueil de jour  F/H</title><link>https://travaillerpourparis.offres.paris.fr/17248/1/agent-social-accueil-de-jour-f-h</link>
+    <guid isPermaLink="false">job-2c3a30e0cc23f8a6</guid>
+    <pubDate>Fri, 02 Oct 2026 17:05:22 +0000</pubDate>
+    <description>Ville de Paris</description>
+  </item>
+  <item>
+    <title>Recrutement Psychologue en Centre d'Accueil de Jour (EHPAD - DEBROUSSE)  F/H</title><link>https://travaillerpourparis.offres.paris.fr/16352/1/recrutement-psychologue-en-centre-d-accueil-de-jour-ehpad-debrousse-f-h</link>
+    <guid isPermaLink="false">job-de76ec456f9b1ec9</guid>
+    <pubDate>Fri, 02 Oct 2026 17:05:22 +0000</pubDate>
     <description>Ville de Paris</description>
   </item>
   <item>
@@ -903,12 +927,6 @@
     <description>Choisy-le-Roi</description>
   </item>
   <item>
-    <title>Apprenti(e) Assistant(e) administratif(ve), chargé(e) du mécénat</title><link>https://www.parismusees.paris.fr/fr/node/7650</link>
-    <guid isPermaLink="false">job-7ecfd96a7ea02569</guid>
-    <pubDate>Wed, 23 Sep 2026 19:10:16 +0000</pubDate>
-    <description>Paris Musées</description>
-  </item>
-  <item>
     <title>Agent d&amp;rsquo;accueil, d&amp;rsquo;entretien et de surveillance des installations sportives (H/F)</title><link>https://recrutement.sceaux.fr/2026/09/23/agent-daccueil-dentretien-et-de-surveillance-des-installations-sportives-h-f/</link>
     <guid isPermaLink="false">job-256f6be800e3749b</guid>
     <pubDate>Wed, 23 Sep 2026 15:34:12 +0000</pubDate>
@@ -1299,10 +1317,10 @@
     <description>Est Ensemble</description>
   </item>
   <item>
-    <title>agent d'accueil de jour en centre d'hébergement  F/H</title><link>https://travaillerpourparis.offres.paris.fr/17225/1/agent-d-accueil-de-jour-en-centre-d-hebergement-f-h</link>
-    <guid isPermaLink="false">job-0b21f54de9726254</guid>
-    <pubDate>Wed, 09 Sep 2026 10:26:22 +0000</pubDate>
-    <description>Ville de Paris</description>
+    <title>MONITEUR·MONITRICE POLICE MUNICIPALE – MBTPI ou MMA (F/H) – Cat. C Direction de la Police Municipale</title><link>https://www.ville-massy.fr/offres-demploi/moniteur%c2%b7monitrice-police-municipale-mbtpi-ou-mma-f-h-cat-c-direction-de-la-police-municipale/</link>
+    <guid isPermaLink="false">job-537aa284074fd245</guid>
+    <pubDate>Wed, 09 Sep 2026 14:44:37 +0000</pubDate>
+    <description>Massy</description>
   </item>
   <item>
     <title>Chargé(e) du suivi budgétaire et des activités commerciales des Editions  F/H</title><link>https://travaillerpourparis.offres.paris.fr/16666/1/charge-e-du-suivi-budgetaire-et-des-activites-commerciales-des-editions-f-h</link>
@@ -1647,10 +1665,28 @@
     <description>Ville de Paris</description>
   </item>
   <item>
+    <title>SERVICE CIVIQUE MEDIATEUR·MEDIATRICE NUMERIQUE – ACCOMPAGNEMENT DES USAGERS AUX DEMARCHES EN LIGNE (F-H) Direc</title><link>https://www.ville-massy.fr/offres-demploi/service-civique-mediateur%c2%b7mediatrice-numerique-accompagnement-des-usagers-aux-demarches-en-ligne-f-h-direction-relation-aux-citoyens-espace-accueil-service/</link>
+    <guid isPermaLink="false">job-dbb789fb0c062722</guid>
+    <pubDate>Thu, 20 Aug 2026 13:28:44 +0000</pubDate>
+    <description>Massy</description>
+  </item>
+  <item>
     <title>Gestionnaire Marchés Publics de Travaux et d'Exploitation (F/H)</title><link>https://vyvs-recrutement.gestmax.fr/710/1/gestionnaire-marches-publics-de-travaux-et-d-exploitation-f-h</link>
     <guid isPermaLink="false">job-b9c41274e855baa9</guid>
     <pubDate>Thu, 20 Aug 2026 12:29:37 +0000</pubDate>
     <description>Val d'Yerres Val de Seine | cat. B</description>
+  </item>
+  <item>
+    <title>AGENT·AGENTE COMPTABLE (F-H) Direction des Finances</title><link>https://www.ville-massy.fr/offres-demploi/agent%c2%b7agente-comptable-f-h-direction-des-finances-categorie-c/</link>
+    <guid isPermaLink="false">job-49d4931d1bad414f</guid>
+    <pubDate>Thu, 20 Aug 2026 09:05:59 +0000</pubDate>
+    <description>Massy | cat. C</description>
+  </item>
+  <item>
+    <title>DIRECTEUR·DIRECTRICE ADJOINT·E DE CRECHE COLLECTIVE – Direction des Solidarités – Petite Enfance</title><link>https://www.ville-massy.fr/offres-demploi/directeur%c2%b7directrice-adjoint%c2%b7e-de-creche-collective-direction-des-solidarites-petite-enfance/</link>
+    <guid isPermaLink="false">job-5165c21fe074ad8d</guid>
+    <pubDate>Thu, 20 Aug 2026 09:05:59 +0000</pubDate>
+    <description>Massy</description>
   </item>
   <item>
     <title>Agent Social – Fonction d’Aide à domicile</title><link>https://recrutement.ville-chatillon.fr/2026/08/19/agent-social-fonction-daide-a-domicile/</link>
@@ -1729,6 +1765,18 @@
     <guid isPermaLink="false">job-3fc390e927dc6272</guid>
     <pubDate>Mon, 10 Aug 2026 07:13:05 +0000</pubDate>
     <description>Ville de Paris</description>
+  </item>
+  <item>
+    <title>SUPERVISEUR·SUPERVISEUSE DE LA BRIGADE DES AGENTS DE SURVEILLANCE DE LA VOIE PUBLIQUE ET DE L’ENVIRONNEMENT (F</title><link>https://www.ville-massy.fr/offres-demploi/superviseur%c2%b7superviseuse-de-la-brigade-des-agents-de-surveillance-de-la-voie-publique-et-de-lenvironnement-f-h-direction-de-la-police-municipale/</link>
+    <guid isPermaLink="false">job-85f1c27b8cd8207c</guid>
+    <pubDate>Fri, 07 Aug 2026 15:37:36 +0000</pubDate>
+    <description>Massy</description>
+  </item>
+  <item>
+    <title>RÉFÉRENT·RÉFÉRENTE ENFANCE – F-H – Direction Vie de Quartier, Jeunesse et Insertion</title><link>https://www.ville-massy.fr/offres-demploi/referent%c2%b7referente-enfance-f-h-direction-vie-de-quartier-jeunesse-et-insertion/</link>
+    <guid isPermaLink="false">job-7c1d53a2bced3be0</guid>
+    <pubDate>Fri, 07 Aug 2026 15:37:36 +0000</pubDate>
+    <description>Massy</description>
   </item>
   <item>
     <title>RESPONSABLE D'EQUIPE D'ACCOMPAGNEMENT SOCIAL   F/H</title><link>https://travaillerpourparis.offres.paris.fr/16671/1/responsable-d-equipe-d-accompagnement-social-f-h</link>
@@ -1869,6 +1917,24 @@
     <description>Est Ensemble</description>
   </item>
   <item>
+    <title>EDUCATEUR·EDUCATRICE DE JEUNES ENFANTS (F-H) Direction des Solidarités – Petite Enfance</title><link>https://www.ville-massy.fr/offres-demploi/educateur%c2%b7educatrice-de-jeunes-enfants-f-h-direction-des-solidarites-petite-enfance/</link>
+    <guid isPermaLink="false">job-2637f8262f90385d</guid>
+    <pubDate>Thu, 30 Jul 2026 12:16:21 +0000</pubDate>
+    <description>Massy</description>
+  </item>
+  <item>
+    <title>AIDE AUXILIAIRE /AGENT-AGENTE POLYVALENT·E – MULTI ACCUEIL COLLECTIF ET FAMILIAL DE VILLAINE (F-H) Direction d</title><link>https://www.ville-massy.fr/offres-demploi/aide-auxiliaire-agent-agente-polyvalent%c2%b7e-multi-accueil-collectif-et-familial-de-villaine-f-h-direction-des-solidarites-petite-enfance/</link>
+    <guid isPermaLink="false">job-d52e864cb5750e32</guid>
+    <pubDate>Thu, 30 Jul 2026 12:16:21 +0000</pubDate>
+    <description>Massy</description>
+  </item>
+  <item>
+    <title>AIDE AUXILIAIRE DE PUERICULTURE (F-H) Direction des Solidarités – Petite Enfance</title><link>https://www.ville-massy.fr/offres-demploi/aide-auxiliaire-de-puericulture-f-h-direction-des-solidarites-petite-enfance/</link>
+    <guid isPermaLink="false">job-2e6e984b098ee559</guid>
+    <pubDate>Thu, 30 Jul 2026 12:16:21 +0000</pubDate>
+    <description>Massy</description>
+  </item>
+  <item>
     <title>Animateur(rice) en résidence autonomie F/H</title><link>https://travaillerpourparis.offres.paris.fr/16460/1/animateur-rice-en-residence-autonomie-f-h</link>
     <guid isPermaLink="false">job-2375da3692033722</guid>
     <pubDate>Wed, 29 Jul 2026 13:10:44 +0000</pubDate>
@@ -1957,6 +2023,12 @@
     <guid isPermaLink="false">job-eafbe88ef90461cf</guid>
     <pubDate>Fri, 24 Jul 2026 17:17:15 +0000</pubDate>
     <description>Antony | cat. A</description>
+  </item>
+  <item>
+    <title>INTERVENANT·INTERVENANTE AIDE À LA SCOLARITE POUR LE PROGRAMME DE REUSSITE EDUCATIVE – F-H – Direction de la J</title><link>https://www.ville-massy.fr/offres-demploi/intervenant%c2%b7intervenante-aide-a-la-scolarite-pour-le-programme-de-reussite-educative-f-h-direction-de-la-jeunesse-et-cohesion-sociale/</link>
+    <guid isPermaLink="false">job-6b06f7c890af96b6</guid>
+    <pubDate>Fri, 24 Jul 2026 17:17:15 +0000</pubDate>
+    <description>Massy</description>
   </item>
   <item>
     <title>Responsable des travaux chauffage et climatisation</title><link>https://leperreux94.nous-recrutons.fr/poste/h75kqm47yh-responsable-des-travaux-chauffage-et-climatisation/</link>
@@ -2339,6 +2411,12 @@
   <item>
     <title>Chargé chargée d'instruction et du suivi des demandes de subventions Vie associative et citoyenne  F</title><link>https://travaillerpourparis.offres.paris.fr/12829/1/charge-chargee-d-instruction-et-du-suivi-des-demandes-de-subventions-vie-associative-et-citoyenne-f</link>
     <guid isPermaLink="false">job-208d05edd841dd61</guid>
+    <pubDate>Wed, 22 Jul 2026 17:01:45 +0000</pubDate>
+    <description>Ville de Paris</description>
+  </item>
+  <item>
+    <title>Agent d'entretien en Centre d'Hébergement   F/H</title><link>https://travaillerpourparis.offres.paris.fr/12731/1/agent-d-entretien-en-centre-d-hebergement-f-h</link>
+    <guid isPermaLink="false">job-55cd1c840e344dea</guid>
     <pubDate>Wed, 22 Jul 2026 17:01:45 +0000</pubDate>
     <description>Ville de Paris</description>
   </item>
