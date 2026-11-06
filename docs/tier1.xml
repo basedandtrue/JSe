@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>Veille culturelle — ciblé</title>
-<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>105 offres</description>
-<lastBuildDate>Fri, 06 Nov 2026 13:29:39 +0000</lastBuildDate>
+<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>104 offres</description>
+<lastBuildDate>Fri, 06 Nov 2026 20:02:55 +0000</lastBuildDate>
+  <item>
+    <title>Intervenant(e) culturel(le)  au Musée de la Libération de Paris (50%)</title><link>https://www.emploi-territorial.fr/offre/o075261106001266-intervenant-e-culturel-le-musee-liberation-paris-50</link>
+    <guid isPermaLink="false">job-971bdc3d4c293fc3</guid>
+    <pubDate>Fri, 06 Nov 2026 00:00:00 +0000</pubDate>
+    <description>Paris Musées | cat. A</description>
+  </item>
   <item>
     <title>Chef.fe de projet AMOA " Transformation " Paris Familles - Sphère Loisirs et activités culturelles</title><link>https://travaillerpourparis.offres.paris.fr/16855/1/chef-fe-de-projet-amoa-transformation-paris-familles-sphere-loisirs-et-activites-culturelles</link>
     <guid isPermaLink="false">job-c54e27355c390c64</guid>
@@ -619,17 +625,5 @@
     <guid isPermaLink="false">job-e7f33466869fb2c7</guid>
     <pubDate>Wed, 05 Nov 2025 00:00:00 +0000</pubDate>
     <description>Châtillon | cat. B</description>
-  </item>
-  <item>
-    <title>Directeur. trice Conservatoire Arpajon F/H</title><link>https://www.coeuressonne.fr/offre-d-emploi/directeur-trice-conservatoire-arpajon-f-h/</link>
-    <guid isPermaLink="false">job-7bcec989f33ff453</guid>
-    <pubDate>Fri, 03 Oct 2025 14:53:52 +0000</pubDate>
-    <description>Coeur d'Essonne</description>
-  </item>
-  <item>
-    <title>Agent de médiathèque F/H</title><link>https://www.coeuressonne.fr/offre-d-emploi/agent-de-mediatheque-f-h/</link>
-    <guid isPermaLink="false">job-8376d9f44d128755</guid>
-    <pubDate>Fri, 15 Mar 2024 17:56:28 +0000</pubDate>
-    <description>Coeur d'Essonne</description>
   </item>
 </channel></rss>
