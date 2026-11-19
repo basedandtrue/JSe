@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>Veille culturelle — ciblé</title>
-<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>90 offres</description>
-<lastBuildDate>Wed, 18 Nov 2026 22:26:48 +0000</lastBuildDate>
+<link>https://www.emploi-territorial.fr/emploi-mobilite/?search-ville=91421&amp;search-distance=20&amp;search-grade%5B%5D=030401&amp;search-grade%5B%5D=030301&amp;search-grade%5B%5D=030904&amp;search-grade%5B%5D=030905&amp;search-grade%5B%5D=030906&amp;search-grade%5B%5D=031301&amp;search-grade%5B%5D=031302&amp;search-grade%5B%5D=031305</link><description>89 offres</description>
+<lastBuildDate>Thu, 19 Nov 2026 14:56:29 +0000</lastBuildDate>
+  <item>
+    <title>Agent de médiathèque Saint-Germain-Lès-Corbeil F/H</title><link>https://www.emploi-territorial.fr/offre/o091261118000273-agent-mediatheque-saint-germain-les-corbeil-h</link>
+    <guid isPermaLink="false">job-015e6e197c6b5ee3</guid>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 +0000</pubDate>
+    <description>Grand Paris Sud Seine Essonne Sénart | cat. C</description>
+  </item>
   <item>
     <title>Chargé de lecture publique-Médiateur Bibliothèque de Nelson Mandela Pantin</title><link>https://recrutement.est-ensemble.fr/806/1/charge-de-lecture-publique-mediateur-bibliotheque-de-nelson-mandela-pantin</link>
     <guid isPermaLink="false">job-b659d8005599a4f3</guid>
@@ -345,8 +351,8 @@
     <description>Longjumeau</description>
   </item>
   <item>
-    <title>Médiathécaire secteur ados/adultes  (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094261021001409-mediathecaire-secteur-ados-adultes</link>
-    <guid isPermaLink="false">job-e4767da4f7d7d355</guid>
+    <title>Médiathécaire secteur adultes (h/f)</title><link>https://www.emploi-territorial.fr/offre/o094261119000533-mediathecaire-secteur-adultes</link>
+    <guid isPermaLink="false">job-9805fb074c607c2d</guid>
     <pubDate>Mon, 28 Sep 2026 00:00:00 +0000</pubDate>
     <description>Grand-Orly Seine Bièvre (T12) | cat. B</description>
   </item>
@@ -385,18 +391,6 @@
     <guid isPermaLink="false">job-7711da744d0a218e</guid>
     <pubDate>Mon, 14 Sep 2026 17:01:40 +0000</pubDate>
     <description>Ville de Paris</description>
-  </item>
-  <item>
-    <title>Chargé.e d'accueil et de scolarité au conservatoire de Bagnolet</title><link>https://recrutement.est-ensemble.fr/763/1/charge-e-d-accueil-et-de-scolarite-au-conservatoire-de-bagnolet</link>
-    <guid isPermaLink="false">job-e30b2529ea7f52a5</guid>
-    <pubDate>Mon, 14 Sep 2026 11:17:45 +0000</pubDate>
-    <description>Est Ensemble</description>
-  </item>
-  <item>
-    <title>Directeur de la Médiathèque de Leuville sur Orge F/H</title><link>https://www.emploi-territorial.fr/offre/o091260910000164-directeur-mediatheque-leuville-sur-orge-h</link>
-    <guid isPermaLink="false">job-7b3b6cbe29cdd942</guid>
-    <pubDate>Thu, 10 Sep 2026 00:00:00 +0000</pubDate>
-    <description>Coeur d'Essonne Agglomération | cat. B</description>
   </item>
   <item>
     <title>Médiathécaire - responsable pôle lecture et littérature  F/H</title><link>https://emploi.gpsea.fr/1536/1/mediathecaire-responsable-pole-lecture-et-litterature-f-h</link>
@@ -538,8 +532,8 @@
   </item>
   <item>
     <title>Agent de médiathèque F/H</title><link>https://www.coeuressonne.fr/offre-d-emploi/agent-de-mediatheque-f-h/</link>
-    <guid isPermaLink="false">job-8376d9f44d128755</guid>
+    <guid isPermaLink="false">job-59df6e396cf42944</guid>
     <pubDate>Fri, 15 Mar 2024 17:56:28 +0000</pubDate>
-    <description>Coeur d'Essonne</description>
+    <description>Coeur d'Essonne | cat. C</description>
   </item>
 </channel></rss>
